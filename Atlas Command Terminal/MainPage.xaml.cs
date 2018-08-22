@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Atlas_Command_Terminal.Models;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -44,7 +45,11 @@ namespace Atlas_Command_Terminal
         private async void OpenFile_Click(object sender, RoutedEventArgs e)
         {
             List<MBINField> fields = new List<MBINField>();
-            fields = LoadMBIN.LoadFIleAsync();
+            fields = await LoadMBIN.LoadFileAsync();
+            foreach (MBINField field in fields)
+            {
+                Debug.WriteLine(field.Name.ToString() + ": " + field.Value.ToString());
+            }
         }
     }
 }

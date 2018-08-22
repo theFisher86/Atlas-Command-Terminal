@@ -17,9 +17,9 @@ namespace Atlas_Command_Terminal.Models
 {
     class LoadMBIN
     {
-        public static List<MBINField> LoadFIleAsync()
+        public async static Task<List<MBINField>> LoadFileAsync()
         {
-            Stream stream = (Stream)MbinLoader().Result.AsOutputStream();
+            Stream stream = await MbinLoader();
             return GetMBINFields(stream);
         }
 
@@ -31,7 +31,7 @@ namespace Atlas_Command_Terminal.Models
 
             StorageFile file = await openPicker.PickSingleFileAsync();
             //Stream stream = await file.OpenStreamForReadAsync();
-            return await file.OpenStreamForReadAsync();
+            return await file.OpenStreamForWriteAsync();
         }
 
         public static List<MBINField> GetMBINFields(Stream file)
