@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Navigation;
 using Atlas_Command_Terminal.Models;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
+using MUXC = Microsoft.UI.Xaml.Controls;                //Don't forget me!
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -45,11 +47,20 @@ namespace Atlas_Command_Terminal
         private async void OpenFile_Click(object sender, RoutedEventArgs e)
         {
             List<MBINField> fields = new List<MBINField>();
+
             fields = await LoadMBIN.LoadFileAsync();
-            foreach (MBINField field in fields)
-            {
-                Debug.WriteLine(field.Name.ToString() + ": " + field.Value.ToString());
-            }
-        }
+
+            ObservableCollection<MBINField> fieldCollection = new ObservableCollection<MBINField>(fields);
+
+            MainItemsControl.DataContext = this;
+            MainItemsControl.ItemsSource = fieldCollection;
+
+            //MainTreeView.DataContext = this;
+            //MainTreeView.ItemsSource = fieldCollection;
+        //foreach (MBINField field in fields)
+        //{
+        //    Debug.WriteLine(field.Name.ToString() + ": " + field.Value.ToString());
+        //}
+    }
     }
 }

@@ -2,22 +2,46 @@
     x:Class="Atlas_Command_Terminal.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Atlas_Command_Terminal"
+    xmlns:local="using:libMBIN.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <!-- That `xmlns:controls="using:Microsoft.UI.Xaml.Controls"` up there is fundamentally important and easy to forget-->
     <Grid>
         <StackPanel>
             <Button Name="OpenFile" Content="Open" Click="OpenFile_Click"/>
-            <ItemsControl Name="MainItemsControl">
-                
+            <ItemsControl x:Name="MainItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Name: "/>
+                            <TextBlock Text="{Binding Name}" Margin="0,0,20,0"/>
+                            <TextBlock Text="Value: "/>
+                            <TextBlock Text="{Binding Value}" Margin="0,0,20,0"/>
+                            <TextBlock Text="Type: "/>
+                            <TextBlock Text="{Binding NMSType}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <TreeViewItem Name="Item">
-                
-            </TreeViewItem>
+            <!--<controls:TreeView x:Name="MainTreeView">                   --><!-- This isn't working quite yet but I'm pretty sure the last example on this page can help (Picture and Music Library TreeView)--><!--
+                <controls:TreeView.ItemTemplate>                        --><!-- https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/tree-view#code-examples --><!--
+                    <DataTemplate>
+                        <controls:TreeViewItem>
+                            <DataTemplate x:DataType="NMSTemplate">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Value}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </controls:TreeViewItem>
+                    </DataTemplate>
+                </controls:TreeView.ItemTemplate>
+            </controls:TreeView>-->
         </StackPanel>
 
     </Grid>
