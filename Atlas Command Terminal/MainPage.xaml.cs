@@ -55,12 +55,12 @@ namespace Atlas_Command_Terminal
             MainItemsControl.DataContext = this;
             MainItemsControl.ItemsSource = fieldCollection;
 
-            //MainTreeView.DataContext = this;
-            //MainTreeView.ItemsSource = fieldCollection;
-        //foreach (MBINField field in fields)
-        //{
-        //    Debug.WriteLine(field.Name.ToString() + ": " + field.Value.ToString());
-        //}
-    }
+            MainTreeView.DataContext = this;
+            MainTreeView.ItemsSource = fieldCollection;
+            //foreach (MBINField field in fields)
+            //{
+            //    Debug.WriteLine(field.Name.ToString() + ": " + field.Value.ToString());
+            //}
+        }
     }
 }
